@@ -12,7 +12,7 @@ apt-get update \
 || error "Unable to execute apt-get update command, exit status = " $?
 
 # Install required packages
-apt-get -y install python-software-properties software-properties-common vim screen pv htop curl \
+apt-get -y install python-software-properties software-properties-common sudo vim screen pv htop curl wget \
 || error "Unable to install required packages, exit status = " $?
 
 

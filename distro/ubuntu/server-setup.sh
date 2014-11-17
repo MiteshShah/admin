@@ -15,5 +15,8 @@ apt-get -y install clamav fail2ban inotify-tools mailutils \
 freshclam \
 || error "Unable to execute freshclam, exit status = " $?
 
-# Filter Port 25 On Startup
-sed -i "s/exit.*/iptables-restore < /etc/iptables.rules\nexit 0;/" /etc/rc.local
+# IPtables based firewall
+wget -O /etc/iptables.rules https://raw.githubusercontent.com/MiteshShah/admin/master/distro/ubuntu/iptables.rules \
+|| error "Unable to download iptables.rules file, exit status = " $?
+sed -i "s/exit.*/iptables-restore < /etc/iptables.rules\nexit 0;/" /etc/rc.local \
+|| error "Unable to setup /etc/rc.local, exit status = " $?
