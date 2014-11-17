@@ -15,4 +15,5 @@ apt-get -y install clamav fail2ban inotify-tools mailutils \
 freshclam \
 || error "Unable to execute freshclam, exit status = " $?
 
-
+# Filter Port 25 On Startup
+sed -i "s/exit.*/iptables-restore < /etc/iptables.rules\nexit 0;/" /etc/rc.local
