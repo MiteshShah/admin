@@ -8,7 +8,6 @@ while true
 do
 	# Check server2 become a live
 	ping -c1 $SERVER2IP &> /dev/null
-	
 	if [ $? == 0 ]
 	then
 		echo "[+] Server becomes alive......"
