@@ -58,11 +58,12 @@ echo "Installing Marvel plugin, please wait..."
 cd /usr/share/elasticsearch/
 bin/plugin -i elasticsearch/marvel/latest
 
-# Disable auto create index
+# Disable auto create index and dynamic scripts
 grep "action.auto_create_index" elasticsearch.yml &> /dev/null
 if [ $? -ne 0 ]; then
   echo "action.auto_create_index: false" >> /etc/elasticsearch/elasticsearch.yml
   echo "index.mapper.dynamic: false" >> /etc/elasticsearch/elasticsearch.yml
+  echo "script.disable_dynamic: true" >> /etc/elasticsearch/elasticsearch.yml
 fi
 
 # Restart Elasticsearch
