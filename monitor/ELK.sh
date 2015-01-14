@@ -4,11 +4,13 @@
 # the Free Software Foundation; either version 2 of the License, or
 # (at your option) any later version.
 
-# Copyright (C) 2012 by Mitesh Shah (Mr.Miteshah@gmail.com)
+# Copyright (C) 2015 by Mitesh Shah (Mr.Miteshah@gmail.com)
 
 ELASTICSEARCH_VERSION=1.4
 LOGSTASH_VERSION=1.4
 KIBANA_VERSION=3.1.2
+ES_CLUSTER_NAME=DEV-ES
+ES_NODE_NAME=DEV-NODE
 
 echo "Fetching Elasticsearch GPGkey, please wait..."
 rpm --import http://packages.elasticsearch.org/GPG-KEY-elasticsearch
@@ -43,3 +45,25 @@ echo "Install/Setup Kibana, please wait..."
 wget -qcO /tmp/kibana.tar.gz https://download.elasticsearch.org/kibana/kibana/kibana-$KIBANA_VERSION.tar.gz
 tar -zxf /tmp/kibana.tar.gz
 mv kibana-3.1.2 /usr/share/nginx/html/kibana
+
+# Configure Elasticsearch
+echo "Configuring Elasticsearch, please wait..."
+sed -i "s/#cluster.name.*/cluster.name: $ES_CLUSTER_NAME/" /etc/elasticsearch/elasticsearch.yml
+sed -i "s/#node.name.*/node.name: $ES_NODE_NAME/" /etc/elasticsearch/elasticsearch.yml
+
+sed -i "s/#index.number_of_shards: 1/index.number_of_shards: 1/" /etc/elasticsearch/elasticsearch.yml
+sed -i "s/#index.number_of_replicas: 0/index.number_of_replicas: 0/" /etc/elasticsearch/elasticsearch.yml
+
+echo "Installing Marvel plugin, please wait..."
+cd /usr/share/elasticsearch/
+bin/plugin -i elasticsearch/marvel/latest
+
+# Disable auto create index
+grep "action.auto_create_index" elasticsearch.yml &> /dev/null
+if [ $? -ne 0 ]; then
+  echo "action.auto_create_index: false" >> /etc/elasticsearch/elasticsearch.yml
+  echo "index.mapper.dynamic: false" >> /etc/elasticsearch/elasticsearch.yml
+fi
+
+# Restart Elasticsearch
+service elasticsearch restart
