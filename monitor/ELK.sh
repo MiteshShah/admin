@@ -12,6 +12,19 @@ KIBANA_VERSION=3.1.2
 ES_CLUSTER_NAME=DEV-ES
 ES_NODE_NAME=DEV-NODE
 
+echo "Install EPEL repository, please wait..."
+yum -y install epel-release
+
+echo "Installing syslog-ng, please wait..."
+yum -y install syslog-ng syslog-ng-libdbi
+
+echo "Execute: service rsyslog stop"
+service rsyslog stop
+chkconfig rsyslog off
+
+echo "Execute: service syslog-ng start"
+service syslog-ng start
+
 echo "Fetching Elasticsearch GPGkey, please wait..."
 rpm --import http://packages.elasticsearch.org/GPG-KEY-elasticsearch
 
@@ -39,7 +52,7 @@ echo "gpgcheck=0" >> /etc/yum.repos.d/nginx.repo
 echo "enabled=1" >> /etc/yum.repos.d/nginx.repo
 
 echo "Installing Elasticsearch, Logstash, Kibara and NGINX, please wait..."
-yum -y install elasticsearch logstash nginx
+yum -y install elasticsearch logstash logstash-contrib nginx
 
 echo "Install/Setup Kibana, please wait..."
 wget -qcO /tmp/kibana.tar.gz https://download.elasticsearch.org/kibana/kibana/kibana-$KIBANA_VERSION.tar.gz
