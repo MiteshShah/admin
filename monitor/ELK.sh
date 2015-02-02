@@ -22,8 +22,8 @@ echo "Execute: service rsyslog stop"
 service rsyslog stop
 chkconfig rsyslog off
 
-echo "Execute: service syslog-ng start"
-service syslog-ng start
+#echo "Execute: service syslog-ng start"
+#service syslog-ng start
 
 echo "Fetching Elasticsearch GPGkey, please wait..."
 rpm --import http://packages.elasticsearch.org/GPG-KEY-elasticsearch
@@ -55,9 +55,11 @@ echo "Installing Elasticsearch, Logstash, Kibara and NGINX, please wait..."
 yum -y install elasticsearch logstash logstash-contrib nginx
 
 echo "Install/Setup Kibana, please wait..."
-wget -qcO /tmp/kibana.tar.gz https://download.elasticsearch.org/kibana/kibana/kibana-$KIBANA_VERSION.tar.gz
-tar -zxf /tmp/kibana.tar.gz
-mv kibana-3.1.2 /usr/share/nginx/html/kibana
+cd /usr/share/nginx/html/
+wget -qc https://download.elasticsearch.org/kibana/kibana/kibana-$KIBANA_VERSION.tar.gz
+tar -zxf /usr/share/nginx/html/kibana-$KIBANA_VERSION.tar.gz
+mv kibana-$KIBANA_VERSION /usr/share/nginx/html/kibana
+rm -f kibana-$KIBANA_VERSION.tar.gz
 
 # Configure Elasticsearch
 echo "Configuring Elasticsearch, please wait..."
@@ -77,7 +79,10 @@ if [ $? -ne 0 ]; then
   echo "action.auto_create_index: false" >> /etc/elasticsearch/elasticsearch.yml
   echo "index.mapper.dynamic: false" >> /etc/elasticsearch/elasticsearch.yml
   echo "script.disable_dynamic: true" >> /etc/elasticsearch/elasticsearch.yml
+  echo 'http.cors.allow-origin: "/.*/"' >> /etc/elasticsearch/elasticsearch.yml
+  echo 'http.cors.enabled: true' >> /etc/elasticsearch/elasticsearch.yml
 fi
 
 # Restart Elasticsearch
 service elasticsearch restart
+nginx -t && service nginx restart
