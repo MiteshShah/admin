@@ -10,5 +10,11 @@ echo "Installing Google Chrome, please wait..."
 brew cask install google-chrome
 brew cask install 1password
 
+echo "Installing Vagrant, please wait..."
+brew cask install vagrant
+
+echo "Installing Virtualbox, please wait..."
+brew cask install virtualbox
+
 echo "Installing Oh-My-ZSH, please wait..."
 curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
