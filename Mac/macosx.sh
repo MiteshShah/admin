@@ -18,3 +18,9 @@ brew cask install virtualbox
 
 echo "Installing Oh-My-ZSH, please wait..."
 curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
+
+echo "Installing Atom, please wait..."
+brew cask install atom
+
+echo "Installing VLC, please wait..."
+brew cask install vlc
