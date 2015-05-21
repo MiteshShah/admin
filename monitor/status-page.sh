@@ -85,7 +85,7 @@ git clone https://github.com/cachethq/Cachet.git
 cd Cachet
 echo_blue "Setup cachet environment variables, please wait..."
 echo -e "APP_ENV=local
-APP_DEBUG=true
+APP_DEBUG=false
 APP_URL=$DOMAIN
 APP_KEY=$APP_KEY
 
