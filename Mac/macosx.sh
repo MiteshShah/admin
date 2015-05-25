@@ -24,3 +24,6 @@ brew cask install atom
 
 echo "Installing VLC, please wait..."
 brew cask install vlc
+
+echo "Installing Watch command, please wait..."
+brew install watch
