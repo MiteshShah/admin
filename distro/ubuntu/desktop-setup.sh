@@ -31,6 +31,11 @@ echo "Adding shutter repository, please wait..."
 sudo add-apt-repository -y ppa:shutter/ppa \
 || ee_lib_error "Unable to add shutter repository, exit status = " $?
 
+# Hipchat
+echo "deb http://downloads.hipchat.com/linux/apt stable main" > \
+  /etc/apt/sources.list.d/atlassian-hipchat.list && \
+  wget -O - https://www.hipchat.com/keys/hipchat-linux.key | apt-key add - \
+  || ee_lib_error "Unable to add Hipchat repository, exit status = " $?
 
 # Execute: apt-get update
 apt-get update \
@@ -38,5 +43,5 @@ apt-get update \
 
 # Install required packages
 echo "Installing necessary packages, please wait..."
-apt-get -y install git-core openssh-server shutter filezilla google-chrome-stable vlc skype sni-qt sni-qt:i386 openjdk-8-jre openjdk-8-jdk diodon nautilus-open-terminal \
+apt-get -y install git-core openssh-server shutter google-chrome-stable vlc hipchat openjdk-8-jre openjdk-8-jdk diodon nautilus-open-terminal \
 || error "Unable to install required packages, exit status = " $?
