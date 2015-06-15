@@ -21,11 +21,6 @@ wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-ke
 && sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list' \
 || ee_lib_error "Unable to add google-chrome repository, exit status = " $?
 
-# Skype Repository 
-echo "Adding skype repository, please wait..."
-sudo sh -c  'echo "deb http://archive.canonical.com/ubuntu/ $(lsb_release -sc) partner" >> /etc/apt/sources.list.d/canonical_partner.list' \
-|| ee_lib_error "Unable to add skype repository, exit status = " $?
-
 # Shutter Repository
 echo "Adding shutter repository, please wait..."
 sudo add-apt-repository -y ppa:shutter/ppa \
