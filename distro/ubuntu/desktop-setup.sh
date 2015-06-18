@@ -47,5 +47,5 @@ apt-get update \
 
 # Install required packages
 echo "Installing necessary packages, please wait..."
-apt-get -y install git-core openssh-server shutter google-chrome-stable vlc hipchat skype sni-qt sni-qt:i386 openjdk-8-jre openjdk-8-jdk gparted diodon caffeine nautilus-open-terminal \
+apt-get -y install curl wget git-core openssh-server shutter google-chrome-stable vlc hipchat skype sni-qt sni-qt:i386 openjdk-8-jre openjdk-8-jdk gparted diodon caffeine nautilus-open-terminal \
 || error "Unable to install required packages, exit status = " $?
