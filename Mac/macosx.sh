@@ -28,5 +28,8 @@ brew cask install vlc
 echo "Installing Caffeine, please wait..."
 brew cask install caffeine
 
+echo "Installing ssh-copy-id command, please wait..."
+brew install ssh-copy-id
+
 echo "Installing Watch command, please wait..."
 brew install watch
