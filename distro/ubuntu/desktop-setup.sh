@@ -45,6 +45,9 @@ sudo add-apt-repository ppa:caffeine-developers/ppa \
 apt-get update \
 || error "Unable to execute apt-get update command, exit status = " $?
 
+# Update System
+apt-get -y dist-upgrade
+
 # Install required packages
 echo "Installing necessary packages, please wait..."
 apt-get -y install curl wget git-core openssh-server shutter google-chrome-stable vlc hipchat skype sni-qt sni-qt:i386 openjdk-8-jre openjdk-8-jdk gparted diodon caffeine nautilus-open-terminal \
