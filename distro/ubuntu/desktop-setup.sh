@@ -45,7 +45,7 @@ apt-get update \
 || error "Unable to execute apt-get update command, exit status = " $?
 
 # Update System
-apt-get -y dist-upgrade
+apt-get -y upgrade
 
 # Install required packages
 echo "Installing necessary packages, please wait..."
