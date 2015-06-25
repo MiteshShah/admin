@@ -34,8 +34,7 @@ echo "deb http://downloads.hipchat.com/linux/apt stable main" > \
   
 # Skype Repository 		
 echo "Adding skype repository, please wait..."		
-sudo sh -c  'echo "deb http://archive.canonical.com/ubuntu/ $(lsb_release -sc) partner" >> /etc/apt/sources.list.d/canonical_partner.list' \		
-|| ee_lib_error "Unable to add skype repository, exit status = " $?
+sudo sh -c  'echo "deb http://archive.canonical.com/ubuntu/ $(lsb_release -sc) partner" >> /etc/apt/sources.list.d/canonical_partner.list' || ee_lib_error "Unable to add skype repository, exit status = " $?
 
 # Caffeine
 sudo add-apt-repository ppa:caffeine-developers/ppa \
