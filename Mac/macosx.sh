@@ -9,6 +9,9 @@ brew install caskroom/cask/brew-cask
 echo "Installing ssh-copy-id command, please wait..."
 brew install ssh-copy-id
 
+echo "Installing Wget command, please wait..."
+brew install wget
+
 echo "Installing Watch command, please wait..."
 brew install watch
 
