@@ -4,7 +4,7 @@
 <dict>
   <key>Label</key>
     <string>ssh-add-a</string>
-    <key>Program</key>
+    <key>ProgramArguments</key>
       <array>
         <string>ssh-add</string>
         <string>-A</string>
